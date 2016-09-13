@@ -1,0 +1,11 @@
+:8080
+gzip
+log stdout
+root ./public
+
+
+header / {
+    Access-Control-Allow-Origin  *
+    Access-Control-Allow-Methods "GET, POST, OPTIONS"
+}
+

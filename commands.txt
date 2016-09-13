@@ -1,0 +1,20 @@
+
+
+
+# start demo using docker-compose
+BACKEND_HOST="localhost:3000" docker-compose up
+
+# deploy to kubernetes using `kompose up`
+BACKEND_HOST=backend.192.168.42.221.xip.io kompose up
+
+# create ingress for minikube
+kubectl create -f ingress.yaml
+
+# deploy to openshift online
+BACKEND_HOST="backend-brno.44fs.preview.openshiftapps.com" kompose convert --dc -o openshfit.json
+
+
+
+
+
+
