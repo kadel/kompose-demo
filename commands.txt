@@ -13,6 +13,7 @@ kubectl create -f ingress.yaml
 # deploy to openshift online
 token request: https://api.preview.openshift.com/oauth/token/request
 BACKEND_HOST="backend-brno.44fs.preview.openshiftapps.com" kompose convert --dc -o openshfit.json
+oc create -f openshift.json
 
 # start Kubernetes cluster in GCP
 gcloud container clusters create kompose --machine-type=g1-small --num-nodes=1
