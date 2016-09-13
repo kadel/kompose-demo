@@ -11,7 +11,18 @@ BACKEND_HOST=backend.192.168.42.221.xip.io kompose up
 kubectl create -f ingress.yaml
 
 # deploy to openshift online
+token request: https://api.preview.openshift.com/oauth/token/request
 BACKEND_HOST="backend-brno.44fs.preview.openshiftapps.com" kompose convert --dc -o openshfit.json
+
+# start Kubernetes cluster in GCP
+gcloud container clusters create kompose --machine-type=g1-small --num-nodes=1
+
+# start Kubernetes in AWS
+export KOPS_STATE_STORE=s3://tomas.kral-kops
+kops create cluster --cloud=aws --zones=eu-west-1a --name=meetup.aws.tomkral.eu
+kops update cluster meetup.aws.tomkral.eu --yes
+
+
 
 
 
