@@ -1,8 +1,16 @@
 
 
 
+# run it using `docker run`
+docker run -d --name backend -p 3000:3000 tomaskral/kompose-demo-backend    
+docker run -d --name frontend -p 8080:8080 -e API_URL=http://localhost:3000/api tomaskral/kompose-demo-frontend
+
 # start demo using docker-compose
 BACKEND_HOST="localhost:3000" docker-compose up
+
+# run it on kubernetes without yaml files
+kubectl run frontend --image=tomaskral/kompose-demo-frontend  --port=8080 --expose --env=API_URL=http://backend.192.168.42.221.xip.io/api
+kubectl run backend --image=tomaskral/kompose-demo-backend  --port=3000 --expose
 
 # deploy to kubernetes using `kompose up`
 BACKEND_HOST=backend.192.168.42.221.xip.io kompose up
@@ -22,11 +30,6 @@ gcloud container clusters create kompose --machine-type=g1-small --num-nodes=1
 export KOPS_STATE_STORE=s3://tomas.kral-kops
 kops create cluster --cloud=aws --zones=eu-west-1a --name=meetup.aws.tomkral.eu
 kops update cluster meetup.aws.tomkral.eu --yes
-
-
-
-
-
 
 
 
