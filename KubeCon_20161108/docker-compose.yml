@@ -1,0 +1,23 @@
+version: "2"
+
+services:
+    guestbook:
+        image: busybox
+        ports:
+            - 3000:3000
+        command: ["sleep", "3600"]
+        links: 
+            - redis-master
+            - redis-slave
+    
+    redis-master:
+        image: redis
+        ports:
+            - 6379:6379
+
+    redis-slave:
+        image: redis
+        ports:
+            - 6378:6379
+        links:
+            - redis-master
