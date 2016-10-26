@@ -1,23 +1,28 @@
 version: "2"
 
 services:
-    guestbook:
-        image: busybox
+    frontend:
+        image: tomaskral/kompose-demo-frontend:kubecon2016
+        ports:
+            - 8080:8080
+
+    backend:
+        image: tomaskral/kompose-demo-backend:kubecon2016
         ports:
             - 3000:3000
-        command: ["sleep", "3600"]
-        links: 
-            - redis-master
-            - redis-slave
-    
-    redis-master:
-        image: redis
+        environment: 
+            MONGODB_PASSWORD: pass
+            MONGODB_USER: user
+            MONGODB_DATABASE: db
+            MONGODB_SERVER: mongodb:27017
+ 
+    mongodb:
+        image: centos/mongodb-26-centos7
         ports:
-            - 6379:6379
-
-    redis-slave:
-        image: redis
-        ports:
-            - 6378:6379
-        links:
-            - redis-master
+            - 27017:27017
+        environment: 
+            MONGODB_PASSWORD: pass
+            MONGODB_USER: user
+            MONGODB_DATABASE: db
+            MONGODB_ADMIN_PASSWORD: root
+            
