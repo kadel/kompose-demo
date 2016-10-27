@@ -121,6 +121,7 @@ func main() {
 	retry := 0
 	maxRetry := 10
 	for err != nil {
+		retry = retry + 1
 		log.Printf("trying connect to db (attempt: %d/%d)", retry, maxRetry)
 		mongo, err = mgo.Dial(mongoServer)
 		log.Printf("Error: %#v\n", err)

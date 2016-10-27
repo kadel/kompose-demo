@@ -6,7 +6,7 @@ VERSION=kubecon2016
 
 all: build
 
-build: server
+build: server.go
 	go build server.go
 
 image: build
