@@ -4,9 +4,9 @@ metadata:
   name: "pv0001" 
 spec:
   capacity:
-    storage: "500Mbi" 
+    storage: "500Mi" 
   accessModes:
     - "ReadWriteOnce"
-  hostPath: 
-	path: /tmp/pv0001
+  hostPath:
+    path: /tmp/pv0001
 
